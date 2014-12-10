@@ -11,7 +11,19 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('index');
+// });
+
+// Route::get('/login', function()
+// {
+// 	return View::make('login');
+// });
+
+Route::get('/', array('as' => 'index', 'uses' => 'berryController@home'));
+
+Route::get('login', array('as' => 'login', 'uses' => 'berryController@log'));
+
+Route::get('register', array('as' => 'register', 'uses' => 'berryController@reg'));
+
