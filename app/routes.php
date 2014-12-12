@@ -22,7 +22,7 @@ Route::filter('logged', function()
 });
 
 Route::get('member', array('as' => 'member', 'uses' => 'berryController@member'))->before('auth');
-Route::post('member', array('uses' => 'berryController@toEdit'));
+Route::post('member', array('uses' => 'berryController@flagEdit'));
 
 Route::get('login', array('as' => 'showlogin', 'uses' => 'berryController@showLogin'));
 Route::post('login', array('uses' => 'berryController@doLogin'));

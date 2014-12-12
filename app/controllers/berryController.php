@@ -175,7 +175,9 @@
 			}
 		}
 
-		public function toEdit()
+
+
+		public function flagEdit()
 		{
 			$eventID = Input::get('hidden');
 			$event = Gathering::where('id', '=', $eventID)->first();
@@ -192,7 +194,6 @@
 			return View::make('edit')->with('event', $event);
 		}
 
-
 		public function doEdit() 	
 		{
 			$event = Gathering::where('flagged', '=', 1)->first();
@@ -205,6 +206,14 @@
 			$event->flagged = 0;
 
 			$event->save();
+
+			return Redirect::to('member');
+		}
+
+		public function deleteEvent()
+		{
+			$eventID = Input::get('hidden');
+			Gathering::destroy($eventID);
 
 			$events = DB::table('gatherings')->get();
 			return View::make('member')->with('events', $events);	
