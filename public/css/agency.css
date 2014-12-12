@@ -925,3 +925,7 @@ section#login:-ms-input-placeholder {
 section#login .text-danger {
     color: #e74c3c;
 }
+
+.bright {
+    color: white;
+}

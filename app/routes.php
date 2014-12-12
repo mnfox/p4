@@ -11,19 +11,31 @@
 |
 */
 
-// Route::get('/', function()
-// {
-// 	return View::make('index');
-// });
+Route::group(array('before' => 'logged'), function()
+{
+   Route::get('/', array('as' => 'index', 'uses' => 'berryController@home'));
+});
 
-// Route::get('/login', function()
-// {
-// 	return View::make('login');
-// });
+Route::filter('logged', function()
+{
+    if (Auth::check()) return Redirect::to('member');
+});
 
-Route::get('/', array('as' => 'index', 'uses' => 'berryController@home'));
+Route::get('member', array('as' => 'member', 'uses' => 'berryController@member'))->before('auth');
+Route::post('member', array('uses' => 'berryController@toEdit'));
 
-Route::get('login', array('as' => 'login', 'uses' => 'berryController@log'));
+Route::get('login', array('as' => 'showlogin', 'uses' => 'berryController@showLogin'));
+Route::post('login', array('uses' => 'berryController@doLogin'));
 
-Route::get('register', array('as' => 'register', 'uses' => 'berryController@reg'));
+Route::get('logout', array('as' => 'logout', 'uses' => 'berryController@doLogout'));
 
+Route::get('register', array('as' => 'register', 'uses' => 'berryController@showReg'));
+Route::post('register', array('uses' => 'berryController@doReg'));
+
+Route::get('create', array('as' => 'create', 'uses' => 'berryController@showEvent'))->before('auth');
+Route::post('create', array('uses' => 'berryController@createEvent'));
+
+Route::get('edit', array('as' => 'edit', 'uses' => 'berryController@showEdit'));
+Route::post('edit', array('uses' => 'berryController@doEdit'));
+
+?>
