@@ -5,36 +5,34 @@
 @stop
 
 @section('navcontent')
-<!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Events</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">History</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#team">Berries</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::route('logout') }}">Log Out</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="hidden">
+                <a href="#page-top"></a>
+            </li>
+            <li>
+                <a class="page-scroll" href="#services">About</a>
+            </li>
+            <li>
+                <a class="page-scroll" href="#portfolio">Events</a>
+            </li>
+            <li>
+                <a class="page-scroll" href="#about">History</a>
+            </li>
+            <li>
+                <a class="page-scroll" href="#team">Berries</a>
+            </li>
+            <li>
+                <a class="page-scroll" href="#contact">Contact</a>
+            </li>
+            <li>
+                <a href="{{ URL::route('logout') }}">Log Out</a>
+            </li>
+        </ul>
+    </div>
 @stop
 
 @section('content')
-    
       <!-- Header -->
     <header>
         <div class="container">
@@ -285,6 +283,4 @@
         </div>
     </section>
 @stop
-
-@section('content2')
 
