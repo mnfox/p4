@@ -54,10 +54,13 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-            'host'      => 'localhost',            
-            'database'  => 'berry',
-            'username'  => 'root',
-            'password'  => 'CjCmOcjTNQ',
+			'host'      => 'localhost',
+			'database'  => 'forge',
+			'username'  => 'forge',
+			'password'  => '',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
 		),
 
 		'pgsql' => array(
