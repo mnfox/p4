@@ -44,7 +44,7 @@
         </div>
     </header>
 
-    <!-- Services Section -->
+    <!-- About Section -->
     <section id="services">
         <div class="container">
             <div class="row">
@@ -82,13 +82,13 @@
         </div>
     </section>
 
-    <!-- Portfolio Grid Section -->
+    <!-- Event Grid Section -->
     <section id="portfolio" class="bg-light-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Events</h2>
-                    <h3 class="section-subheading text-muted">Here you'll find a list of upcoming events around the world. <a href="{{ URL::route('create') }}">Please click here to create your own event.</a?</h3>
+                    <h3 class="section-subheading text-muted">Here you'll find a list of upcoming events around the world. <a href="{{ URL::route('create') }}">Please click here to create your own event.</a></h3>
                 </div>
             </div>
             <div class="row">
@@ -127,7 +127,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- History Section -->
     <section id="about">
         <div class="container">
             <div class="row">
@@ -208,7 +208,7 @@
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Types Section -->
     <section id="team" class="bg-light-gray">
         <div class="container">
             <div class="row">

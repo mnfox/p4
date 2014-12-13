@@ -4,58 +4,57 @@
 	{
 		public function home() 	
 		{
+			// get events and make index page
 			$events = DB::table('gatherings')->get();
 			return View::make('index')->with('events', $events);
 		}
 
 		public function member()
 		{
+			// get events and make member page
 			$events = DB::table('gatherings')->get();
 			return View::make('member')->with('events', $events);
 		}
 
 		public function showLogin()
 		{
+			// make log in page
 			return View::make('login');
 		}
 
 		public function doLogin()
 		{
-			// validate the info, create rules for the inputs
+			// create validation rules for user input
 			$rules = array(
-				'email'    => 'required|email', // make sure the email is an actual email
-				'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+				'email'    => 'required|email', 
+				'password' => 'required|alphaNum' 
 			);			
 
-			// run the validation rules on the inputs from the form
+			// validate and return if unable to validate
 			$validator = Validator::make(Input::all(), $rules);
-
-			// if the validator fails, redirect back to the form
 			if ($validator->fails()) {
 				return Redirect::to('login')
-					->withErrors($validator) // send back all errors to the login form
-					->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+					->withErrors($validator) 
+					->withInput(Input::except('password')); 
 			} 
 
+			// if validation ok
 			else 
 
 			{
-				// create our user data for the authentication
+				// get form data
 				$userdata = array(
 					'email' 	=> Input::get('email'),
 					'password' 	=> Input::get('password')
 				);
 
-				// attempt to do the login
+				// attempt login and send to appropriate page
 				if (Auth::attempt($userdata)) 
 				{
 					return Redirect::to('member');
 				} 
-
 				else 
-
 				{	 	
-					// validation not successful, send back to form	
 					return Redirect::to('login');
 				}
 
@@ -64,50 +63,50 @@
 
 		public function doLogout()
 		{
-			Auth::logout(); // log the user out of our application
-			return Redirect::to('login'); // redirect the user to the login screen
+			// log out and redirect back to log in
+			Auth::logout(); 
+			return Redirect::to('login'); 
 		}
 
 		public function showReg()
 		{
+			// make registration page
 			return View::make('register');
 		}
 
 		public function doReg()
 		{
-			// validate the info, create rules for the inputs
+			// create validation rules for user input
 			$rules = array(
-				'name' => 'required|alphaNum|min:3', // password can only be alphanumeric and has to be greater than 3 characters
-				'email' => 'required|email', // make sure the email is an actual email
-				'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+				'name' => 'required|alphaNum|min:3', 
+				'email' => 'required|email', 
+				'password' => 'required|alphaNum' 
 			);			
 
-			// run the validation rules on the inputs from the form
+			// validate and return if unable to validate
 			$validator = Validator::make(Input::all(), $rules);
-
-			// if the validator fails, redirect back to the form
 			if ($validator->fails()) {
 				return Redirect::to('register')
-					->withErrors($validator) // send back all errors to the login form
-					->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+					->withErrors($validator) 
+					->withInput(Input::except('password')); 
 			} 
 
+			// if validation ok
 			else 
-
 			{
+				// check that email is unique
 				$rules = array(
 					'email' => 'unique:users,email'
 				);
-
 				$validator = Validator::make(Input::all(), $rules);
-
 				if ($validator->fails()) {
 					return Redirect::to('register')->withErrors($validator);
 				}
 
+				// if validation ok
 				else
-
 				{
+					// create new user
 					$user = new User();
 
 					$user->username = Input::get('name');
@@ -116,8 +115,8 @@
 
 					$user->save();
 
+					// log in new user and send to member page
 					Auth::login($user);
-
 					return Redirect::to('member');
 				}
 			}
@@ -125,24 +124,24 @@
 
 		public function showEvent() 	
 		{
+			// make create event page
 			return View::make('create');
 		}
 
 		public function createEvent()
 		{
-
+			// attendance count
 			$initialattend = 0;
-			// validate the info, create rules for the inputs
+
+			// create validation rules for user input
 			$rules = array(
 				'location' => 'required', 
 				'time' => 'required', 
 				'description' => 'required', 
 			);			
 
-			// run the validation rules on the inputs from the form
+			// validate and return if unable to validate
 			$validator = Validator::make(Input::all(), $rules);
-
-			// if the validator fails, redirect back to the form
 			if ($validator->fails()) 
 			{
 				return Redirect::to('create')
@@ -150,8 +149,10 @@
 					->withInput(); 
 			} 
 
+			// if validation ok
 			else 
 			{
+				// create new event
 				$event = new Gathering();
 
 				$event->type = Input::get('type');
@@ -159,7 +160,9 @@
 				$event->date = Input::get('time');
 				$event->description = Input::get('description');
 				$event->attending = $initialattend;
+				$event->flagged = $initialattend;
 
+				// if user is logged in
 				if (Auth::check())
 				{
 					$event->createdby = Auth::user()->id;
@@ -171,18 +174,21 @@
 
 				$event->save();
 
+				// return to member page
 				return Redirect::to('member');
 			}
 		}
 
 		public function flagEdit()
 		{
+			// flag the event to be altered
 			$eventID = Input::get('hidden');
 			$event = Gathering::where('id', '=', $eventID)->first();
 			$event->flagged = 1;
 
 			$event->save();
 
+			// redirect to appropriate function requested
 			if (Input::has('join'))
 			{
 				return Redirect::to('join');
@@ -195,6 +201,7 @@
 			{
 				return Redirect::to('edit');
 			}
+			// or send back to member page
 			else
 			{
 				return Redirect::to('member');
@@ -203,76 +210,90 @@
 
 		public function showEdit()
 		{
+			// make edit page with data needed to prefill form
 			$event = Gathering::where('flagged', '=', 1)->first();
 			return View::make('edit')->with('event', $event);
 		}
 
 		public function doEdit() 	
 		{
+			// get event that needs editing
 			$event = Gathering::where('flagged', '=', 1)->first();
 
+			// make any changes based on input
 			$event->type = Input::get('type');
 			$event->location = Input::get('location');
 			$event->date = Input::get('time');
 			$event->description = Input::get('description');
 
+			// unglag the event
 			$event->flagged = 0;
 
 			$event->save();
 
+			// return to member page
 			return Redirect::to('member');
 		}
 
 		public function joinEvent()
 		{
+			// if there is a flagged event
 			if(Gathering::where('flagged', '=', 1)->first())
 			{
 				$event = Gathering::where('flagged', '=', 1)->first();
 				$eventID = $event->id;
+
+				// and if a user is logged in
 				if(Auth::check())
-				{
+				{	
+					// add record to pivot table
 					$userID = Auth::user()->id;
 					$gathering = Gathering::find($eventID);
     				$gathering->users()->attach(array($userID));
 
+					// unflag event
 					$event->flagged = 0;
 
 					$event->save();
-
-					Redirect::to('member');
 				}
-				else
-				{
-					Redirect::to('member');
-				}	
 			}
+			// return to member page
 			return Redirect::to('member');
 		}
 
 		public function unjoinEvent()
 		{
+			// if there is a flagged event
 			if(Gathering::where('flagged', '=', 1)->first())
 			{
 				$event = Gathering::where('flagged', '=', 1)->first();
+				
+				// delete the pivot table entry
 				DB::table('user_gathering')->where('user_id', '=', Auth::user()->id)->where('gathering_id', '=', $event->id)->delete();
 			}
 
+			// unflag event
 			$event->flagged = 0;
 
 			$event->save();
 
+			// return to member page
 			return Redirect::to('member');
 		}
 
 		public function deleteEvent()
 		{
+			// if there is a flagged event
 			if(Gathering::where('flagged', '=', 1)->first())
 			{
+				// delete event
 				$event = Gathering::where('flagged', '=', 1)->first();
 				$eventID = $event->id;
 
 				Gathering::destroy($eventID);				
 			}
+
+			// return to member
 			return Redirect::to('member');
 		}
 	}

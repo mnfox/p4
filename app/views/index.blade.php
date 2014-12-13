@@ -33,7 +33,7 @@
 @stop
 
 @section('content')
-      <!-- Header -->
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="intro-text">
@@ -44,7 +44,7 @@
         </div>
     </header>
 
-    <!-- Services Section -->
+    <!-- Avout Section -->
     <section id="services">
         <div class="container">
             <div class="row">
@@ -82,7 +82,7 @@
         </div>
     </section>
 
-    <!-- Portfolio Grid Section -->
+    <!-- Event Grid Section -->
     <section id="portfolio" class="bg-light-gray">
         <div class="container">
             <div class="row">
@@ -114,7 +114,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- History Section -->
     <section id="about">
         <div class="container">
             <div class="row">
@@ -195,7 +195,7 @@
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Types Section -->
     <section id="team" class="bg-light-gray">
         <div class="container">
             <div class="row">
