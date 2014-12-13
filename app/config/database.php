@@ -55,8 +55,8 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => 'forge',
-			'username'  => 'forge',
+			'database'  => 'berry',
+			'username'  => 'root',
 			'password'  => 'CjCmOcjTNQ',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
