@@ -54,13 +54,11 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
-			'database'  => 'berry',
-			'username'  => 'root',
-			'password'  => 'CjCmOcjTNQ',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+            'host'      => '127.0.0.1',
+            'unix_socket'   => '/Applications/MAMP/tmp/mysql/mysql.sock',
+            'database'  => 'berry',
+            'username'  => 'root',
+            'password'  => 'CjCmOcjTNQ',
 		),
 
 		'pgsql' => array(
