@@ -28,12 +28,11 @@
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::text('password', $value = null, $attributes =[
-                                        'type' => 'password',
+                                    {{ Form::password('password', array(
                                         'class' => 'form-control',
                                         'placeholder' => 'Your Password *',
                                         'id' => 'password',
-                                    ])}}
+                                    ))}};
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>

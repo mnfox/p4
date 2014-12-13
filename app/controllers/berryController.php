@@ -183,7 +183,22 @@
 
 			$event->save();
 
-			return Redirect::to('edit');
+			if (Input::has('join'))
+			{
+				return Redirect::to('join');
+			}
+			else if (Input::has('unjoin'))
+			{
+				return Redirect::to('unjoin');
+			}
+			else if (Input::has('edit'))
+			{
+				return Redirect::to('edit');
+			}
+			else
+			{
+				return Redirect::to('member');
+			}
 		}
 
 		public function showEdit()
@@ -208,13 +223,55 @@
 			return Redirect::to('member');
 		}
 
+		public function joinEvent()
+		{
+			if(Gathering::where('flagged', '=', 1)->first())
+			{
+				$event = Gathering::where('flagged', '=', 1)->first();
+				$eventID = $event->id;
+				if(Auth::check())
+				{
+					$userID = Auth::user()->id;
+					$gathering = Gathering::find($eventID);
+    				$gathering->users()->attach(array($userID));
+
+					$event->flagged = 0;
+
+					$event->save();
+
+					Redirect::to('member');
+				}
+				else
+				{
+					Redirect::to('member');
+				}	
+			}
+			return Redirect::to('member');
+		}
+
+		public function unjoinEvent()
+		{
+			if(Gathering::where('flagged', '=', 1)->first())
+			{
+				$event = Gathering::where('flagged', '=', 1)->first();
+				DB::table('user_gathering')->where('user_id', '=', Auth::user()->id)->where('gathering_id', '=', $event->id)->delete();
+			}
+
+			$event->flagged = 0;
+
+			$event->save();
+
+			return Redirect::to('member');
+		}
+
 		public function deleteEvent()
 		{
 			if(Gathering::where('flagged', '=', 1)->first())
 			{
 				$event = Gathering::where('flagged', '=', 1)->first();
 				$eventID = $event->id;
-				Gathering::destroy($eventID);	
+
+				Gathering::destroy($eventID);				
 			}
 			return Redirect::to('member');
 		}

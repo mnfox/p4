@@ -1,13 +1,6 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
-class Gathering extends Eloquent implements UserInterface, RemindableInterface {
-
-	use UserTrait, RemindableTrait;
+class Gathering extends Eloquent {
 
 	/**
 	 * The database table used by the model.
@@ -17,6 +10,14 @@ class Gathering extends Eloquent implements UserInterface, RemindableInterface {
 	protected $table = 'gatherings';
 
 	public function users() {
-		return $this->belongsToMany('User', 'user_event', 'gathering_id', 'user_id');
+		return $this->belongsToMany('User', 'user_gathering', 'gathering_id', 'user_id');
 	}
+
+	public static function user_gathering($gatheringID)
+    {
+
+    	$result = User::find(Auth::user()->id)->gatherings()->where('gathering_id', '=', $gatheringID)->exists();
+
+    	return $result;
+    }
 }

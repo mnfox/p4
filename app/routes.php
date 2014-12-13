@@ -40,4 +40,8 @@ Route::post('edit', array('uses' => 'berryController@doEdit'));
 
 Route::get('delete', array('as' => 'delete', 'uses' => 'berryController@deleteEvent'));
 
+Route::get('join', array('as' => 'join', 'uses' => 'berryController@joinEvent'));
+
+Route::get('unjoin', array('as' => 'unjoin', 'uses' => 'berryController@unjoinEvent'));
+
 ?>

@@ -105,10 +105,14 @@
                             <h6>{{ $event->date }}</h6>
                             <p class="text-muted">{{ $event->description }}</p>
                             {{ Form::open() }}
-                            {{ Form::button('Join', ['class' => 'btn btn-primary']) }}
+                            {{ Form::hidden('hidden', $event->id) }} 
+                            @if (Gathering::user_gathering($event->id))
+                                {{ Form::submit('Unjoin', ['name' => 'unjoin', 'class' => 'btn btn-primary']) }}                                
+                            @else
+                                {{ Form::submit('Join', ['name' => 'join', 'class' => 'btn btn-primary']) }}
+                            @endif                         
                             @if (Auth::check())
                                 @if ($event->createdby == Auth::user()->id)
-                                    {{ Form::hidden('hidden', $event->id) }}
                                     {{ Form::submit('Edit', ['name' => 'edit', 'class' => 'btn btn-primary']) }}
                                 @endif
                             @endif
