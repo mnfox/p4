@@ -59,6 +59,9 @@
                             </div>
                         </div>
                     {{ Form::close() }}
+                    <div class="col-lg-12 text-center">
+                        <h3 class="section-subheading text-muted"><a href="{{ URL::route('delete') }}">Delete event</a?</h3>
+                    </div>
                 </div>
             </div>
         </div>

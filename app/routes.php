@@ -38,4 +38,6 @@ Route::post('create', array('uses' => 'berryController@createEvent'));
 Route::get('edit', array('as' => 'edit', 'uses' => 'berryController@showEdit'));
 Route::post('edit', array('uses' => 'berryController@doEdit'));
 
+Route::get('delete', array('as' => 'delete', 'uses' => 'berryController@deleteEvent'));
+
 ?>
