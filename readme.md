@@ -1,3 +1,30 @@
+p4
+==
+
+CSCI E-15 Project Four (Final)
+
+Live URL
+--
+http://p4.mnfox.me
+
+Demo
+--
+To Be Added
+
+Description 
+--
+This is my final project for CSCI E-15. It is a site for a made up organisation called the 'Berry Appreciation Society'. The site is made for the society to share their history, news, and showcase their events. Members can join and create, edit, and delete their own events, as well as join other people's events. 
+
+Log In Information
+--
+I created a default user that you can use to see member only interactions without having to register. Log in details are as follows:
+Email: kit@kit.com
+Password: kitkitkit
+
+Outside code
+--
+I started with a base bootstrap template called Agency (http://startbootstrap.com/template-overviews/agency/) and built from there. The site also utilises Font Awesome (http://fortawesome.github.io/Font-Awesome), JQuery (http://jquery.com), and a handful of JS plug-ins, all listed in the Agency site linked above. And, of course, laravel was used, full details below.
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
