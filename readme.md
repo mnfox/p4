@@ -9,7 +9,7 @@ http://p4.mnfox.me
 
 Demo
 --
-To Be Added
+http://screencast.com/t/gv6UlJbQ
 
 Description 
 --
@@ -17,7 +17,7 @@ This is my final project for CSCI E-15. It is a site for a made up organisation 
 
 Log In Information
 --
-I created a default user that you can use to see member only interactions without having to register. Log in details are as follows:
+I created a default user that you can use to see member only interactions without having to register (although you are more than welcome to register). Log in details are as follows:
 Email: kit@kit.com
 Password: kitkitkit
 
